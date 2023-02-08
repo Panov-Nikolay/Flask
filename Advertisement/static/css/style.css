@@ -1,0 +1,9 @@
+h1 {
+    color: red;
+}
+
+.alert {
+    padding: 0;
+    padding-top: 30px;
+    margin-bottom: 5px;
+}
