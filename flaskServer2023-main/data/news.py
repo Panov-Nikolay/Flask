@@ -1,11 +1,11 @@
 import datetime
 import sqlalchemy
 from sqlalchemy import orm
-
+from sqlalchemy_serializer import SerializerMixin
 from .db_session import SqlAlchemyBase
 
 
-class News(SqlAlchemyBase):
+class News(SqlAlchemyBase, SerializerMixin):
     __tablename__ = 'news'
 
     id = sqlalchemy.Column(sqlalchemy.Integer,
@@ -20,7 +20,6 @@ class News(SqlAlchemyBase):
                                 sqlalchemy.ForeignKey("users.id"))
     user = orm.relationship('User')
 
-    def __repr__(self):
-        return f"""{self.title}
-    {self.content}
-"""
+    categories = orm.relationship("Category",
+                                  secondary="association",
+                                  backref="news")
